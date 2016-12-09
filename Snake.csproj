@@ -43,8 +43,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Food.cs" />
+    <Compile Include="Entities\Snake.cs" />
+    <Compile Include="Input\Keyboard.cs" />
+    <Compile Include="Level\Level.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\GameOverScreen.cs" />
+    <Compile Include="Screens\GameScreen.cs" />
+    <Compile Include="Screens\HighScoreScreen.cs" />
+    <Compile Include="Screens\IntroScreen.cs" />
+    <Compile Include="Screens\MenuScreen.cs" />
+    <Compile Include="Screens\UIElements\Arrow.cs" />
+    <Compile Include="Screens\UIElements\LogoAnimation.cs" />
+    <Compile Include="Screens\UIElements\MenuText.cs" />
+    <Compile Include="Screens\UIElements\MultiColoredTextLabel.cs" />
+    <Compile Include="Screens\UIElements\SplashText.cs" />
+    <Compile Include="Screens\UIElements\TextLabel.cs" />
+    <Compile Include="Screens\UIElements\TextPage.cs" />
+    <Compile Include="Screens\UIElements\TitleText.cs" />
+    <Compile Include="Utils\CrashReporter.cs" />
+    <Compile Include="Utils\RandomEx.cs" />
+    <Compile Include="Utils\Rectangle.cs" />
+    <Compile Include="Utils\Vector2.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Assets\helpText.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
