@@ -46,7 +46,7 @@
     <Compile Include="Entities\Food.cs" />
     <Compile Include="Entities\Snake.cs" />
     <Compile Include="Input\Keyboard.cs" />
-    <Compile Include="Level\Level.cs" />
+    <Compile Include="GameLevel\Level.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\GameOverScreen.cs" />

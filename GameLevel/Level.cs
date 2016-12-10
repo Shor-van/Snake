@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Snake.Level
+namespace Snake.GameLevel
 {
     class Level
     {
