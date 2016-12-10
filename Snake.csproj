@@ -65,7 +65,6 @@
     <Compile Include="Utils\CrashReporter.cs" />
     <Compile Include="Utils\RandomEx.cs" />
     <Compile Include="Utils\Rectangle.cs" />
-    <Compile Include="Utils\Vector2.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

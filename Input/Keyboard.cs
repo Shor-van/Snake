@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Snake.Input
 {
-    //Will handle all the input logic
+    /// <summary>Handles all the keyboard input</summary>
     public static class Keyboard
     {
         private static ConsoleKeyInfo currentKeyInfo; //The current key info

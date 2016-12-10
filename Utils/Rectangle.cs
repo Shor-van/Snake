@@ -9,12 +9,11 @@ namespace Snake.Utils
     struct Rectangle
     {
         //Static members
+        public static Rectangle Empty { get { return new Rectangle(0, 0, 0, 0); } }
 
         //Properties
-        public int X { get; set; } //The left location of the rectengle on the screen
-        public int Y { get; set; } //The top location of the rectangle on the screen
-        public int Width { get; set; } //The width of the rectangle
-        public int Height { get; set; } //The height of the rectangle
+        public int X, Y; //The top left coordinates of the rectangle on the screen
+        public int Width, Height; //The width an d height of the rectangle 
 
         /// <summary>Creates a rectangle object</summary>
         /// <param name="x">The left location of the rectangle on the screen</param>
@@ -23,10 +22,10 @@ namespace Snake.Utils
         /// <param name="height">The height of the rectangle</param>
         public Rectangle(int x, int y, int width, int height)
         {
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
+            this.X = x;
+            this.Y = y;
+            this.Width = width;
+            this.Height = height;
         }
 
         /// <summary>Checks if the rectangle is intersecting with an other rectangle</summary>

@@ -5,6 +5,8 @@ using System.Text;
 using System.IO;
 using System.Reflection;
 
+using Snake.Utils;
+
 namespace Snake.Screens.UIElements
 {
     public class SplashText //Could have used the TextLabel Obj but meh
@@ -108,7 +110,7 @@ namespace Snake.Screens.UIElements
         /// <summary>Selects a new slpash text string from the splashTexts array at random</summary>
         public void GenerateNewSplashText()
         {
-            int idx = Program.GenerateRandom(0, splashTexts.Length);
+            int idx = RandomEx.GenerateRandom(0, splashTexts.Length);
             text = splashTexts[idx];
             this.id = idx;
 
@@ -137,11 +139,11 @@ namespace Snake.Screens.UIElements
                     //Change
                     if (chars[i] == '*')
                     {
-                        chars[i] = (char)Program.GenerateRandom(0, 128);
+                        chars[i] = (char)RandomEx.GenerateRandom(0, 128);
 
                         //Anti space and escape chars
                         while (chars[i] == ' ' || IsEscapeChar(chars[i]))
-                            chars[i] = (char)Program.GenerateRandom(0, 128);
+                            chars[i] = (char)RandomEx.GenerateRandom(0, 128);
                     }
                    
                     //Rebuild
