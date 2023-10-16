@@ -1,0 +1,55 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        { //Net 5 build
+            "label": "Net 5 build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Snake.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        { //Net 5 publish
+            "label": "Net 5 publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/Sbake.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        { //Net 5 watch
+            "label": "Net 5 watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/Snake.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+
+        { //build 64-bit NetFW debug
+            "label": "NetFW build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Snake.csproj",
+                "/property:GenerateFullPaths=true",
+                "/p:Configuration=Debug-VS-Code",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+    ]
+}

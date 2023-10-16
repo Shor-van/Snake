@@ -1,0 +1,39 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET 5 Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Net 5 build",
+            "program": "${workspaceFolder}/UTLTerminal-NetTestApp/bin/Debug/net5.0/UTLTerminal-NetTestApp.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/UTLTerminal-NetTestApp/bin/Debug/net5.0",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Attach",
+            "type": "coreclr",
+            "request": "attach"
+        },
+
+        {
+            "name": ".NET Framework Launch (console)",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "NetFW build",
+            "program": "${workspaceFolder}/bin/Debug/x64/Snake.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/bin/Debug/x64",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Framework Attach",
+            "type": "clr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        },
+    ]
+}

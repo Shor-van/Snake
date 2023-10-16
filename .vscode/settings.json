@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+      "**.gitattributes": true, 
+      "**.gitignore": true, 
+      "**.user": true, 
+      "**/bin": true, 
+      "**/obj": true, 
+      "**/.vs": true, 
+      "**/Properties": true, 
+      "**/packages": true, 
+      "**.sln": true, 
+      "**.code-workspace": true, 
+      "App.config": true, 
+    }
+  }
