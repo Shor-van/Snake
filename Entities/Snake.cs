@@ -14,9 +14,15 @@ namespace Snake.Entities
         internal const char bodySegment = 'B'; //the char used for the snake boday segment
         internal const char tailSegment = 'T'; //the char used for the snake tail segment
 
-        private List<SnakeSegment> segments; //The snake's segments
+        private readonly List<SnakeSegment> segments; //The snake's segments
         private Direction moveDirection; //The current direction the snake is moving in
         private int lastTailX, lastTailY; //The last X and Y location of the tail
+
+        /// <summary>Get the X position of the snake's head segment</summary>
+        internal int HeadX => segments[0].X;
+
+        /// <summary>Get the Y position of the snake's head segment</summary>
+        internal int HeadY => segments[0].Y;
 
         internal Snake(int initialSize, int headX, int headY, Direction moveDirection)
         {
@@ -36,6 +42,21 @@ namespace Snake.Entities
         {
 
         }
+    
+        internal void Draw()
+        {
+            int tailIdx = segments.Count - 1; //see if we need to 'clear' the tail
+            if(segments[tailIdx].X != lastTailX || segments[tailIdx].Y != lastTailY)
+            {
+                Console.SetCursorPosition(lastTailX, lastTailY);
+                Console.Write(' ');
+                lastTailX = segments[tailIdx].X;
+                lastTailY = segments[tailIdx].Y;
+            }
+
+            for (int i = 0; i < segments.Count; i++)
+                segments[i].Draw();
+        }
 
         internal void Move(Direction direction)
         {
@@ -50,7 +71,7 @@ namespace Snake.Entities
                 case Direction.Right: hX += 1; break;
             }
 
-            //check if the new position would hit it self
+            //check if the new position would hit it self //TODO: this is temporary for testing 
             if(Intersects(hX, hY) == true) return;
 
             //get the tail is(used to 'clear')
@@ -65,6 +86,19 @@ namespace Snake.Entities
             segments[0].SetPosition(hX, hY);
         }
 
+        /// <summary>Grows the length of the snake by one, </summary>
+        internal void Grow()
+        {
+            int tailIdx = segments.Count - 1;
+            int x = segments[tailIdx].X;
+            int y = segments[tailIdx].Y;
+
+            //move tail to is last position
+            segments[tailIdx].SetPosition(lastTailX, lastTailY);
+
+            segments.Insert(tailIdx, new SnakeSegment(x, y, SegmentType.Body));
+        }
+
         /// <summary>Checks if the given X/Y location intersects with the snake</summary>
         /// <param name="x">The X location to check</param>
         /// <param name="y">The Y location to check</param>
@@ -75,21 +109,6 @@ namespace Snake.Entities
                 if(segments[i].Intersects(x, y) == true)
                     return true;
             return false;
-        }
-
-        internal void Draw()
-        {
-            int tailIdx = segments.Count - 1; //see if we need to 'clear' the tail
-            if(segments[tailIdx].X != lastTailX || segments[tailIdx].Y != lastTailY)
-            {
-                Console.SetCursorPosition(lastTailX, lastTailY);
-                Console.Write(' ');
-                lastTailX = segments[tailIdx].X;
-                lastTailY = segments[tailIdx].Y;
-            }
-
-            for (int i = 0; i < segments.Count; i++)
-                segments[i].Draw();
         }
     }
 }

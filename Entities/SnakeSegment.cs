@@ -25,6 +25,17 @@ namespace Snake.Entities
             this.type = type;
         }
 
+        /// <summary>Draws the segment to the console</summary>
+        internal void Draw()
+        {
+            char sgementChar = Snake.bodySegment;
+            if (type == SegmentType.Head) sgementChar = Snake.headSegment;
+            else if (type == SegmentType.Tail) sgementChar = Snake.tailSegment;
+
+            Console.SetCursorPosition(x, y);
+            Console.Write(sgementChar);
+        }
+
         /// <summary>Checks if the given X/Y values intersect with the segment</summary>
         /// <param name="x">The X location to check</param>
         /// <param name="y">The Y location to check</param>
@@ -44,17 +55,6 @@ namespace Snake.Entities
 
             this.x = x; 
             this.y = y; 
-        }
-
-        /// <summary>Draws the segment to the console</summary>
-        internal void Draw()
-        {
-            char sgementChar = Snake.bodySegment;
-            if (type == SegmentType.Head) sgementChar = Snake.headSegment;
-            else if (type == SegmentType.Tail) sgementChar = Snake.tailSegment;
-
-            Console.SetCursorPosition(x, y);
-            Console.Write(sgementChar);
         }
     }
 }

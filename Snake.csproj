@@ -60,6 +60,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Entities/Snake.cs" />
     <Compile Include="Entities/SnakeSegment.cs" />
+    <Compile Include="Entities/Food.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 
