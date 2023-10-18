@@ -58,9 +58,13 @@
 
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="Entities/Snake.cs" />
-    <Compile Include="Entities/SnakeSegment.cs" />
-    <Compile Include="Entities/Food.cs" />
+    <Compile Include="GameSnake.cs" />
+    <Compile Include="Screens/Screen.cs" />
+    <Compile Include="Entities/SnakeEntity.cs" />
+    <Compile Include="Entities/SnakeEntitySegment.cs" />
+    <Compile Include="Entities/FoodEntity.cs" />
+    <Compile Include="Utilities/RandomHelper.cs" />
+    <Compile Include="Utilities/Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 

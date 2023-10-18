@@ -2,15 +2,15 @@ using System;
 
 namespace Snake.Entities
 {
-    /// <summary>Represents a pice of food</summary>
-    internal sealed class Food
+    /// <summary>Represents a piece of food that a snake can eat to 'grow'</summary>
+    internal sealed class FoodEntity
     {
-        internal const char foodChar = '$';
+        internal const char foodChar = '$'; //the char used to draw the food
 
         private int x; //the X loctaion of the food
         private int y; //the Y location of the food
 
-        internal Food(int x, int y)
+        internal FoodEntity(int x, int y)
         {
             this.x = x;
             this.y = y;

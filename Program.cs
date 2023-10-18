@@ -1,15 +1,23 @@
 ﻿using System;
 
 using Snake.Entities;
+using Snake.Utilities;
 
 namespace Snake
 {
     internal static class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
-            Entities.Snake snake = new Entities.Snake(3,5,5,Direction.Up);
-            Food food = new Food(7, 10);
+            Test();
+
+            new GameSnake().Run();
+        }
+
+        private static void Test()
+        {
+            SnakeEntity snake = new SnakeEntity(3,5,5,Direction.Up);
+            FoodEntity food = new FoodEntity(7, 10);
             snake.Draw();
             food.Draw();
 
@@ -23,7 +31,7 @@ namespace Snake
 
                 if (food.Intersects(snake.HeadX, snake.HeadY) == true)
                 {
-                    food = new Food(new Random().Next(1, 50), new Random().Next(1, 25));
+                    food = new FoodEntity(RandomHelper.RandomInt(1, 50), RandomHelper.RandomInt(1, 25));
                     snake.Grow();
                 }
 
