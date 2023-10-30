@@ -16,18 +16,20 @@ namespace Snake
 
         private static void Test()
         {
-            SnakeEntity snake = new SnakeEntity(3,5,5,Direction.Up);
+            SnakeEntity snake = new SnakeEntity(3,5,5, ConsoleColor.Green, Direction.Up);
             FoodEntity food = new FoodEntity(7, 10);
             snake.Draw();
             food.Draw();
 
             while(true)
             {
+                int moveAmount = 1;
+
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                if(keyInfo.Key == ConsoleKey.W) snake.Move(Direction.Up);
-                else if(keyInfo.Key == ConsoleKey.S) snake.Move(Direction.Down);
-                else if(keyInfo.Key == ConsoleKey.A) snake.Move(Direction.Left);
-                else if(keyInfo.Key == ConsoleKey.D) snake.Move(Direction.Right);
+                if(keyInfo.Key == ConsoleKey.W) snake.Move(Direction.Up, moveAmount);
+                else if(keyInfo.Key == ConsoleKey.S) snake.Move(Direction.Down, moveAmount);
+                else if(keyInfo.Key == ConsoleKey.A) snake.Move(Direction.Left, moveAmount);
+                else if(keyInfo.Key == ConsoleKey.D) snake.Move(Direction.Right, moveAmount);
 
                 if (food.Intersects(snake.HeadX, snake.HeadY) == true)
                 {

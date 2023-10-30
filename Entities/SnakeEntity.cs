@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Snake.Utilities;
 
 namespace Snake.Entities
@@ -16,6 +17,7 @@ namespace Snake.Entities
         internal const char tailSegment = 'T'; //the char used for the snake tail segment  ▲►▼◄
 
         private readonly List<SnakeEntitySegment> segments; //The snake's segments
+        private readonly ConsoleColor color; //The snakes primary color
         private bool fullRedraw; //wether the snake should be completely redrawn
         private Direction moveDirection; //The current direction the snake is moving in
 
@@ -31,7 +33,10 @@ namespace Snake.Entities
         /// <summary>Get wether the snake should be fully redrawn</summary>
         internal bool FullRedraw => fullRedraw;
 
-        internal SnakeEntity(int initialSize, int headX, int headY, Direction moveDirection)
+        /// <summary>Gets the snake's primary color</summary>
+        internal ConsoleColor PrimaryColor => color;
+
+        internal SnakeEntity(int initialSize, int headX, int headY, ConsoleColor color, Direction moveDirection)
         {
             if(initialSize < minimumSnakeSize) //check that initial size is not less then min
                 throw new ArgumentOutOfRangeException(nameof(initialSize) + " cannot be less then " + minimumSnakeSize, nameof(initialSize));
@@ -39,6 +44,7 @@ namespace Snake.Entities
             //TODO: validate that the snake fits in the play area
 
             this.moveDirection = moveDirection;
+            this.color = color;
 
             //create segments
             segments = new List<SnakeEntitySegment>();
@@ -60,7 +66,7 @@ namespace Snake.Entities
         {
 
         }
-        
+
         /// <summary>Draws the snake in the console at its current location</summary>
         internal void Draw()
         {

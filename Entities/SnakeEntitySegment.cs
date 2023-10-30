@@ -54,7 +54,10 @@ namespace Snake.Entities
             //reset last position and draw segment
             lastX = x; lastY = y;
             Console.SetCursorPosition(x, y);
+            ConsoleColor current = Console.ForegroundColor;
+            Console.ForegroundColor = snake.PrimaryColor;
             Console.Write(sgementChar);
+            Console.ForegroundColor = current;
         }
 
         /// <summary>Checks if the given X/Y values intersect with the segment</summary>
