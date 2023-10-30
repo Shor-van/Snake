@@ -17,7 +17,6 @@ namespace Snake.Screens
         {
             if (justSwitchedTo == true) //Check if the screen was just switched to
                 OnScreenSwitchTo();
-
             UpdateScreen();
         }
 
