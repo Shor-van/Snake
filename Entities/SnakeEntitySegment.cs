@@ -63,12 +63,24 @@ namespace Snake.Entities
         /// <summary>Checks if the given X/Y values intersect with the segment</summary>
         /// <param name="x">The X location to check</param>
         /// <param name="y">The Y location to check</param>
-        /// <returns>True if the given location intersects with theS segments</returns>
+        /// <returns>True if the given location intersects with the segment</returns>
         internal bool Intersects(int x, int y) => this.x == x && this.y == y;
+
+        /// <summary>Checks if the segment lays within the specified 'rectangle'</summary>
+        /// <param name="left">The left most point of the rectangle</param>
+        /// <param name="top">The top most point of the rectangle</param>
+        /// <param name="width">The width of the rectangle</param>
+        /// <param name="height">The height of the rectangle</param>
+        /// <returns>True if the given 'rectangle' intersects with the segment</returns>
+        internal bool Intersects(int left, int top, int width, int height) => x >= left && x < left + width && y >= top && y < top + height;
 
         /// <summary>Set the position of the segment to an other segment</summary>
         /// <param name="other">The other segment of the position to set to</param>
         internal void SetPosition(SnakeEntitySegment other) => SetPosition(other.x, other.y);
+
+        /// <summary>Set the position of the segment</summary>
+        /// <param name="position">A <see cref="ValueTuple"/> containing the x and y value to set</param>
+        internal void SetPosition((int x, int y) position) => SetPosition(position.x, position.y);
 
         /// <summary>Set the position of the segment</summary>
         /// <param name="x">The new X location to set</param>

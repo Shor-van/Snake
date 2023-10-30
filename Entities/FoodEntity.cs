@@ -32,5 +32,13 @@ namespace Snake.Entities
         /// <param name="y">The Y location to check</param>
         /// <returns>True if the given location intersects with the food, false if not</returns>
         internal bool Intersects(int x, int y) => this.x == x && this.y == y;
+
+        /// <summary>Checks if the food lays within the specified 'rectangle'</summary>
+        /// <param name="left">The left most point of the rectangle</param>
+        /// <param name="top">The top most point of the rectangle</param>
+        /// <param name="width">The width of the rectangle</param>
+        /// <param name="height">The height of the rectangle</param>
+        /// <returns>True if the given 'rectangle' intersects with the food</returns>
+        internal bool Intersects(int left, int top, int width, int height) => x >= left && x < left + width && y >= top && y < top + height;
     }
 }
