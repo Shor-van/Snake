@@ -16,8 +16,8 @@ namespace Snake.Entities
         internal const char tailSegment = 'T'; //the char used for the snake tail segment  ▲►▼◄
 
         private readonly List<SnakeEntitySegment> segments; //The snake's segments
+        private bool fullRedraw; //wether the snake should be completely redrawn
         private Direction moveDirection; //The current direction the snake is moving in
-        private int lastTailX, lastTailY; //The last X and Y location of the tail
 
         /// <summary>Get the snake's head segment</summary>
         internal SnakeEntitySegment Head => segments[0];
@@ -28,67 +28,72 @@ namespace Snake.Entities
         /// <summary>Get the Y position of the snake's head segment</summary>
         internal int HeadY => segments[0].Y;
 
+        /// <summary>Get wether the snake should be fully redrawn</summary>
+        internal bool FullRedraw => fullRedraw;
+
         internal SnakeEntity(int initialSize, int headX, int headY, Direction moveDirection)
         {
             if(initialSize < minimumSnakeSize) //check that initial size is not less then min
                 throw new ArgumentOutOfRangeException(nameof(initialSize) + " cannot be less then " + minimumSnakeSize, nameof(initialSize));
 
-            //TODO: validate headX and headY
+            //TODO: validate that the snake fits in the play area
 
-            segments = new List<SnakeEntitySegment>();
-            segments.Add(new SnakeEntitySegment(headX, headY, SegmentType.Head));
-            for (int i = 1; i < initialSize; i++)
-                segments.Add(new SnakeEntitySegment(headX, headY + i, i != initialSize - 1 ? SegmentType.Body : SegmentType.Tail));
             this.moveDirection = moveDirection;
+
+            //create segments
+            segments = new List<SnakeEntitySegment>();
+            segments.Add(new SnakeEntitySegment(headX, headY, SegmentType.Head, this));
+            for (int i = 1; i < initialSize; i++) 
+            {
+                int segmentX = headX, segmentY = headY;
+                switch (moveDirection) {
+                    case Direction.Up: segmentY += i; break;
+                    case Direction.Down: segmentY -= i; break;
+                    case Direction.Left: segmentX += i; break;
+                    case Direction.Right: segmentX -= i; break;
+                }
+                segments.Add(new SnakeEntitySegment(segmentX, segmentY, i != initialSize - 1 ? SegmentType.Body : SegmentType.Tail, this)); 
+            }
         }
 
         internal void Update()
         {
 
         }
-    
+        
         /// <summary>Draws the snake in the console at its current location</summary>
         internal void Draw()
         {
-            int tailIdx = segments.Count - 1; //see if we need to 'clear' the tail
-            if(segments[tailIdx].X != lastTailX || segments[tailIdx].Y != lastTailY)
-            {
-                Console.SetCursorPosition(lastTailX, lastTailY);
-                Console.Write(' ');
-                lastTailX = segments[tailIdx].X;
-                lastTailY = segments[tailIdx].Y;
-            }
-
             for (int i = 0; i < segments.Count; i++)
                 segments[i].Draw();
+            fullRedraw = false;
         }
 
-        internal void Move(Direction direction)
+        internal void Move(Direction direction, int moveAmount = 1)
         {
             //calculate the head's new position based on the direction
             int hX = segments[0].X;
             int hY = segments[0].Y;
             switch (direction)
             {
-                case Direction.Up: hY -= 1; break;
-                case Direction.Down: hY += 1; break;
-                case Direction.Left: hX -= 1; break;
-                case Direction.Right: hX += 1; break;
+                case Direction.Up: hY -= moveAmount; break;
+                case Direction.Down: hY += moveAmount; break;
+                case Direction.Left: hX -= moveAmount; break;
+                case Direction.Right: hX += moveAmount; break;
             }
 
             //check if the new position would hit it self //TODO: this is temporary for testing 
             if(Utils.IsWithinWindowBoundery(hX, hY) == false || Intersects(hX, hY) == true) return;
 
-            //get the tail is(used to 'clear')
-            int tailIdx = segments.Count - 1;
-            lastTailX = segments[tailIdx].X;
-            lastTailY = segments[tailIdx].Y;
-            
             //set the posiition of each segemnt to the on 'infromt' of it
             for (int i = segments.Count - 1; i > 0; i--)
-                segments[i].SetPosition(segments[i - 1]);
+            {
+                segments[i].SetPosition(segments[i - moveAmount]);
+            }
 
             segments[0].SetPosition(hX, hY);
+
+            if(moveAmount > 1) fullRedraw = true;
         }
 
         /// <summary>Grows the length of the snake by one segment</summary>
@@ -99,9 +104,9 @@ namespace Snake.Entities
             int y = segments[tailIdx].Y;
 
             //move tail to is last position
-            segments[tailIdx].SetPosition(lastTailX, lastTailY);
+            segments[tailIdx].ResetPosition();
 
-            segments.Insert(tailIdx, new SnakeEntitySegment(x, y, SegmentType.Body));
+            segments.Insert(tailIdx, new SnakeEntitySegment(x, y, SegmentType.Body, this));
         }
 
         /// <summary>Checks if the given X/Y location intersects with the snake</summary>
