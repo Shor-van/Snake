@@ -60,11 +60,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="GameSnake.cs" />
     <Compile Include="Screens/Screen.cs" />
+    <Compile Include="Screens/MenuScreen.cs" />
     <Compile Include="Entities/SnakeEntity.cs" />
     <Compile Include="Entities/SnakeEntitySegment.cs" />
     <Compile Include="Entities/FoodEntity.cs" />
     <Compile Include="Utilities/RandomHelper.cs" />
     <Compile Include="Utilities/Utils.cs" />
+    <Compile Include="Utilities/GameTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 
