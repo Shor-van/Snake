@@ -5,7 +5,7 @@ namespace Snake.Utilities
     /// <summary>Class that holds methods that help with generating random numbers</summary>
     internal static class RandomHelper
     {
-        private static Random random = new Random(); //random generator object with random seed
+        private static readonly Random random = new Random(); //random generator object with random seed
 
         /// <summary>Gets a random int</summary>
         /// <returns>A random in value</returns>
