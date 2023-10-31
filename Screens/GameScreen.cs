@@ -2,20 +2,20 @@ using System;
 
 namespace Snake.Screens
 {
-    /// <summary>Represents the game's main menu screen</summary>
-    internal sealed class MenuScreen : Screen
+    /// <summary></summary>
+    internal sealed class GameScreen : Screen
     {
-        internal MenuScreen(GameSnake gameInstance)
+        internal GameScreen(GameSnake gameInstance)
         : base(gameInstance)
         {
-            
+
         }
-        
+
         internal override void HandleInput()
         {
             throw new NotImplementedException();
         }
-
+        
         protected override void UpdateScreen()
         {
             throw new NotImplementedException();

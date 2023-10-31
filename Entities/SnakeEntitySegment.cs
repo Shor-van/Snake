@@ -23,10 +23,10 @@ namespace Snake.Entities
         /// <summary>Get the Y position of the segment</summary>
         internal int Y => y;
 
-        /// <summary></summary>
+        /// <summary>Get the Last X position of the segment</summary>
         internal int LastX => lastX;
 
-        /// <summary></summary>
+        /// <summary>Get the Last Y position of the segment</summary>
         internal int LastY => lastY;
 
         internal SnakeEntitySegment(int x, int y, SegmentType type, SnakeEntity snake)

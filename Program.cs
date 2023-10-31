@@ -9,7 +9,7 @@ namespace Snake
     {
         private static void Main()
         {
-            Test();
+            //Test();
 
             new GameSnake().Run();
         }
