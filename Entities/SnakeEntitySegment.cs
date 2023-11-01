@@ -46,13 +46,16 @@ namespace Snake.Entities
             else if (type == SegmentType.Tail) sgementChar = SnakeEntity.tailSegment;
 
             //clear the segment from the screen if we need
-            if(type == SegmentType.Tail || snake.FullRedraw == true && (x != lastX || y != lastY)) { 
+            if((type == SegmentType.Tail || snake.FullRedraw == true) && (x != lastX || y != lastY) && Utils.IsWithinConsoleViewport(lastX, lastY) == true) { 
                 Console.SetCursorPosition(lastX, lastY);
                 Console.Write(' ');
             }
 
             //reset last position and draw segment
             lastX = x; lastY = y;
+
+            if(Utils.IsWithinConsoleViewport(x, y) == false) return;
+
             Console.SetCursorPosition(x, y);
             ConsoleColor current = Console.ForegroundColor;
             Console.ForegroundColor = snake.PrimaryColor;

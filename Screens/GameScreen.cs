@@ -8,14 +8,15 @@ namespace Snake.Screens
     /// <summary></summary>
     internal sealed class GameScreen : Screen
     {
-        SnakeEntity snake = new SnakeEntity(3,5,5, ConsoleColor.Green, Direction.Up);
-        FoodEntity food = new FoodEntity(7, 10);
+        SnakeEntity playerSnake;
+        FoodEntity food;
 
         internal GameScreen(GameSnake gameInstance) : base(gameInstance) { }
 
         protected override void InitalizeScreen()
         {
-            
+            playerSnake = new SnakeEntity(3, 5, 5, ConsoleColor.Green, Direction.Up);
+            food = new FoodEntity(7, 10);
         }
 
         protected override void LayoutScreen()
@@ -35,22 +36,22 @@ namespace Snake.Screens
             if (Console.KeyAvailable == true)
             {
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.W) snake.Move(Direction.Up, moveAmount);
-                else if (keyInfo.Key == ConsoleKey.S) snake.Move(Direction.Down, moveAmount);
-                else if (keyInfo.Key == ConsoleKey.A) snake.Move(Direction.Left, moveAmount);
-                else if (keyInfo.Key == ConsoleKey.D) snake.Move(Direction.Right, moveAmount);
+                if (keyInfo.Key == ConsoleKey.W) playerSnake.Move(Direction.Up, moveAmount);
+                else if (keyInfo.Key == ConsoleKey.S) playerSnake.Move(Direction.Down, moveAmount);
+                else if (keyInfo.Key == ConsoleKey.A) playerSnake.Move(Direction.Left, moveAmount);
+                else if (keyInfo.Key == ConsoleKey.D) playerSnake.Move(Direction.Right, moveAmount);
             }
-            
-            if (food.Intersects(snake.HeadX, snake.HeadY) == true)
+
+            if (food.Intersects(playerSnake.HeadX, playerSnake.HeadY) == true)
             {
                 food = new FoodEntity(RandomHelper.RandomInt(1, 50), RandomHelper.RandomInt(1, 25));
-                snake.Grow();
+                playerSnake.Grow();
             }
         }
 
         protected override void DrawScreen(GameTime gameTime)
         {
-            snake.Draw();
+            playerSnake.Draw();
             food.Draw();
         }
     }
