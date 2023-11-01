@@ -67,8 +67,8 @@ namespace Snake
         /// <summary>Execute's the update part of the game's loop</summary>
         private void Update(GameTime gameTime)
         {
-            primaryScreem.HandleInput(); //process input for screen
-            primaryScreem.Update(); //update screen
+            primaryScreem?.HandleInput(); //process input for screen
+            primaryScreem?.Update(); //update screen
 
             for (int i = 0; i < screens.Count; i++)
                 if(screens[i] != primaryScreem)
@@ -78,7 +78,7 @@ namespace Snake
         /// <summary>Executes the draw part of the game's loop</summary>
         private void Draw(GameTime gameTime)
         {
-            primaryScreem.Draw();
+            primaryScreem?.Draw();
             for (int i = 0; i < screens.Count; i++)
                 if(screens[i] != primaryScreem)
                     screens[i].Draw();
