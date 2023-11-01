@@ -87,7 +87,7 @@ namespace Snake.Entities
         /// <param name="y">The new Y location to set</param>
         internal void SetPosition(int x, int y) 
         { 
-            if(Utils.IsWithinWindowBoundery(x, y) == false) //Check that X/Y is within the window boundery //TODO: change this to be 'play area'
+            if(Utils.IsWithinConsoleBuffer(x, y) == false) //Check that X/Y is within the window boundery //TODO: change this to be 'play area'
                 throw new ArgumentOutOfRangeException(nameof(x) + "/" + nameof(y) + " is not widthin the console window boundery.", nameof(x) + "/" + nameof(y));
 
             lastX = this.x; 

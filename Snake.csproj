@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -62,6 +62,8 @@
     <Compile Include="Screens/Screen.cs" />
     <Compile Include="Screens/MenuScreen.cs" />
     <Compile Include="Screens/GameScreen.cs" />
+    <Compile Include="Screens/UIElements/MenuText.cs" />
+    <Compile Include="Screens/UIElements/TextLabel.cs" />
     <Compile Include="Entities/SnakeEntity.cs" />
     <Compile Include="Entities/SnakeEntitySegment.cs" />
     <Compile Include="Entities/FoodEntity.cs" />

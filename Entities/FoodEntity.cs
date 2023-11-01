@@ -23,6 +23,8 @@ namespace Snake.Entities
 
         internal void Draw()
         {
+            if(Utilities.Utils.IsWithinConsoleViewport(x, y) == false) return;
+
             Console.SetCursorPosition(x, y);
             Console.Write(foodChar);
         }

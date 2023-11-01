@@ -90,7 +90,7 @@ namespace Snake.Entities
             }
 
             //check if the new position would hit it self //TODO: this is temporary for testing, //TODO: check colisions, if head colides with self or other 
-            if(Utils.IsWithinWindowBoundery(newHeadX, newHeadY) == false || Intersects(newHeadX, newHeadY) == true) 
+            if(Utils.IsWithinConsoleBuffer(newHeadX, newHeadY) == false || Intersects(newHeadX, newHeadY) == true) 
                 return;
 
             //set the posiition of each segemnt to the on 'infromt' of it

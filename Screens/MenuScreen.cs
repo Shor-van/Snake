@@ -1,29 +1,37 @@
 using System;
 
+using Snake.Utilities;
+
 namespace Snake.Screens
 {
     /// <summary>Represents the game's main menu screen</summary>
     internal sealed class MenuScreen : Screen
     {
-        internal MenuScreen(GameSnake gameInstance)
-        : base(gameInstance)
+        internal MenuScreen(GameSnake gameInstance) : base(gameInstance) { }
+        
+        protected override void InitalizeScreen()
         {
             
         }
-        
-        internal override void HandleInput()
+
+        protected override void LayoutScreen()
         {
-            throw new NotImplementedException();
+            
         }
 
-        protected override void UpdateScreen()
+        internal override void HandleInput(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            
         }
 
-        protected override void DrawScreen()
+        protected override void UpdateScreen(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        protected override void DrawScreen(GameTime gameTime)
+        {
+            
         }
     }
 }

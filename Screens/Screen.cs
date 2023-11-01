@@ -1,4 +1,5 @@
 using System;
+using Snake.Utilities;
 
 namespace Snake.Screens
 {
@@ -7,30 +8,63 @@ namespace Snake.Screens
     {
         protected readonly GameSnake gameInstance; //A referance to the game the screen 'belongs' to
         protected bool justSwitchedTo; //whether the screen was just switched to
+        private bool initalized; //whether the screen has been initalized
 
+        /// <summary>Gets wether the <see cref="Screen"/> has been initalized</summary>
+        internal bool Initalized => initalized;
+
+        /// <summary>Get or set whether this <see cref="Screen"/> was just switched to, witch means it will call <see cref="Screen.OnScreenSwitchTo"/></summary>
+        internal bool JustSwitchedTo { get => justSwitchedTo; set => justSwitchedTo = value; }
+
+        /// <summary>Base constructor for <see cref="Screen"/>, this should never be called outside a dervied class</summary>
+        /// <param name="gameInstance">Refrence to the game's main instance</param>
+        /// <exception cref="ArgumentNullException">Thrown if gameInstance is null</exception>
         protected Screen(GameSnake gameInstance) => this.gameInstance = gameInstance ?? throw new ArgumentNullException(nameof(gameInstance) + " cannot be null", nameof(gameInstance));
 
-        /// <summary>Called when the screen was just switched to</summary>
-        protected virtual void OnScreenSwitchTo() { }
-
-        internal void Update() 
+        /// <summary>Initalizes the <see cref="Screen"/> and all of it's objects</summary>
+        public void Initalize()
         {
-            if (justSwitchedTo == true) //Check if the screen was just switched to
-                OnScreenSwitchTo();
-            UpdateScreen();
+            //Check if screen was aready initalized
+            if (initalized == true) return;
+
+            InitalizeScreen();
+            initalized = true;
         }
 
-        internal abstract void HandleInput();
+        /// <summary>Initalizes the screen and all of its objects</summary>
+        protected abstract void InitalizeScreen();
 
-        protected abstract void UpdateScreen();
+        /// <summary>Recalulates the positions for all the screens's elements</summary>
+        protected abstract void LayoutScreen();
 
-        internal void Draw()
+        /// <summary>Called when the screen was just switched to</summary>
+        /// <param name="gameTime"></param>
+        protected virtual void OnScreenSwitchTo(GameTime gameTime) { }
+
+        /// <summary>Called when the screen was just switched from</summary>
+        internal virtual void OnScreenSwitchFrom() { }
+
+        internal void Update(GameTime gameTime) 
         {
-            DrawScreen();
+            if (justSwitchedTo == true) { //Check if the screen was just switched to
+                LayoutScreen();
+                OnScreenSwitchTo(gameTime);
+            }
+
+            UpdateScreen(gameTime);
+        }
+
+        internal abstract void HandleInput(GameTime gameTime);
+
+        protected abstract void UpdateScreen(GameTime gameTime);
+
+        internal void Draw(GameTime gameTime)
+        {
+            DrawScreen(gameTime);
 
             justSwitchedTo = false;
         }
 
-        protected abstract void DrawScreen();
+        protected abstract void DrawScreen(GameTime gameTime);
     }
 }
