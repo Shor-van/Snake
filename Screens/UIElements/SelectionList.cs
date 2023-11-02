@@ -79,9 +79,9 @@ namespace Snake.Screens
             if(Keyboard.IsNewKeyPress(ConsoleKey.Enter) == true) //enter pressed, option selected
                 OnOptionSelected(highlightedIdx, EventArgs.Empty);
             else if (Keyboard.IsNewKeyPress(ConsoleKey.W) == true) //move highlighted index up
-                highlightedIdx = highlightedIdx == 0 ? options.Length - 1 : highlightedIdx - 1;
+                { highlightedIdx = highlightedIdx == 0 ? options.Length - 1 : highlightedIdx - 1; OnHighlightedChnaged(EventArgs.Empty); }
             else if (Keyboard.IsNewKeyPress(ConsoleKey.S) == true) //move highlighted index down
-                highlightedIdx = highlightedIdx == options.Length - 1 ? 0 : highlightedIdx + 1;
+                { highlightedIdx = highlightedIdx == options.Length - 1 ? 0 : highlightedIdx + 1; OnHighlightedChnaged(EventArgs.Empty); }
         }
 
         /// <summary>Updates the <see cref="SelectionList"/>, does nothing</summary>
