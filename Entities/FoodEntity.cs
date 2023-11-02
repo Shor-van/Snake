@@ -26,8 +26,7 @@ namespace Snake.Entities
         {
             if(Utilities.Utils.IsWithinConsoleViewport(x, y) == false) return;
 
-            Console.SetCursorPosition(x, y);
-            Console.Write(foodChar);
+            drawBuffer.SetChar(x, y, foodChar);
         }
 
         /// <summary>Checks if the given X/Y values intersect with the food</summary>

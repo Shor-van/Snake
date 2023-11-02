@@ -43,22 +43,12 @@ namespace Snake.Entities
             if (type == SegmentType.Head) sgementChar = SnakeEntity.headSegment;
             else if (type == SegmentType.Tail) sgementChar = SnakeEntity.tailSegment;
 
-            //clear the segment from the screen if we need
-            if((type == SegmentType.Tail || snake.FullRedraw == true) && (x != lastX || y != lastY) && Utils.IsWithinConsoleViewport(lastX, lastY) == true) { 
-                Console.SetCursorPosition(lastX, lastY);
-                Console.Write(' ');
-            }
-
             //reset last position and draw segment
             lastX = x; lastY = y;
 
             if(Utils.IsWithinConsoleViewport(x, y) == false) return;
 
-            Console.SetCursorPosition(x, y);
-            ConsoleColor current = Console.ForegroundColor;
-            Console.ForegroundColor = snake.PrimaryColor;
-            Console.Write(sgementChar);
-            Console.ForegroundColor = current;
+            drawBuffer.SetChar(x, y, sgementChar, snake.PrimaryColor);
         }
 
         /// <summary>Checks if the given X/Y values intersect with the segment</summary>

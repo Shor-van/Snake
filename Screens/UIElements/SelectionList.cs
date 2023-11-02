@@ -96,13 +96,20 @@ namespace Snake.Screens
             ConsoleColor current = Console.ForegroundColor;
             for (int i = 0; i < options.Length; i++) {
                 int optLen = options[i].Length + highlightPrompte.Length;
-                Console.ForegroundColor = i == highlightedIdx ? highlightedColor : textColor;
 
-                Console.CursorTop = y + i; //set cursor position
-                Console.CursorLeft = textAlignment == Alignment.Left || optLen == width ? x : 
+                int top = y + i; //set cursor position
+                int left = textAlignment == Alignment.Left || optLen == width ? x : 
                     x + (textAlignment == Alignment.Center ? halfWidth - (optLen / 2) : width - optLen);
-                
-                Console.Write((i == highlightedIdx ? highlightPrompte : new string(' ', highlightPrompte.Length)) + options[i]);
+
+                string optText; ConsoleColor foreColor;
+                if(i != highlightedIdx) { //set color and option text
+                    optText = new string(' ', highlightPrompte.Length) + options[i];
+                    foreColor = textColor;
+                } else {
+                    optText = highlightPrompte + options[i];
+                    foreColor = highlightedColor;
+                }
+                drawBuffer.Write(left, top, optText, foreColor, ConsoleColor.Black);
             }
             Console.ForegroundColor = current;
         }

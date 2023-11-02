@@ -33,7 +33,7 @@ namespace Snake
             Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
             Console.Title = "Snake";
 
-            drawBuffer = new DrawBuffer(0, 0, (short)Console.BufferWidth, (short)Console.BufferHeight, Encoding.Unicode, ConsoleColor.Gray, ConsoleColor.Blue);
+            drawBuffer = new DrawBuffer(0, 0, (short)Console.BufferWidth, (short)Console.BufferHeight, Encoding.Unicode, ConsoleColor.Gray, ConsoleColor.Black);
 
             ShowScreen(new MenuScreen(this));
             isExiting = false;
@@ -102,7 +102,7 @@ namespace Snake
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            drawBuffer.DrawToConsole();
+            drawBuffer.FiinalizeDrow(true);
             stopwatch.Stop();
         }
 
