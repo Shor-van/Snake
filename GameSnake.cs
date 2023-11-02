@@ -12,6 +12,7 @@ namespace Snake
         private bool isExiting; //whether the game is exiting
         private bool isRunning; //indicates that Run() has been called
         private TimeSpan targetTimeStep; //the target time between each game tick
+        private readonly int targetTicksPerSecond = 60; //the target number of update ticks per second
         private readonly List<Screen> screens; //holds a list of all active game screens
         private readonly Stopwatch gameTimer; //a stopwatch used to keep track of the current loop time
         private readonly GameTime gameTime; //holds data about the games overall runtime
@@ -20,13 +21,14 @@ namespace Snake
             screens = new List<Screen>();
             gameTime = new GameTime();
             gameTimer = new Stopwatch();
-            targetTimeStep = TimeSpan.FromMilliseconds(16.66667);
+            targetTimeStep = TimeSpan.FromMilliseconds(1000 / targetTicksPerSecond);
         }
 
         /// <summary>Initalizes the game, sets up the screens</summary>
         private void Initalize()
         {
             Console.CursorVisible = false;
+            Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
             Console.Title = "Snake";
 
             ShowScreen(new MenuScreen(this));
