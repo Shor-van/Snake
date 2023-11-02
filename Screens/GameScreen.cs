@@ -33,14 +33,10 @@ namespace Snake.Screens
         {
             int moveAmount = 1;
 
-            if (Console.KeyAvailable == true)
-            {
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.W) playerSnake.Move(Direction.Up, moveAmount);
-                else if (keyInfo.Key == ConsoleKey.S) playerSnake.Move(Direction.Down, moveAmount);
-                else if (keyInfo.Key == ConsoleKey.A) playerSnake.Move(Direction.Left, moveAmount);
-                else if (keyInfo.Key == ConsoleKey.D) playerSnake.Move(Direction.Right, moveAmount);
-            }
+            if (Keyboard.IsKeyPressed(ConsoleKey.W)) playerSnake.Move(Direction.Up, moveAmount);
+            else if (Keyboard.IsKeyPressed(ConsoleKey.S)) playerSnake.Move(Direction.Down, moveAmount);
+            else if (Keyboard.IsKeyPressed(ConsoleKey.A)) playerSnake.Move(Direction.Left, moveAmount);
+            else if (Keyboard.IsKeyPressed(ConsoleKey.D)) playerSnake.Move(Direction.Right, moveAmount);
 
             if (food.Intersects(playerSnake.HeadX, playerSnake.HeadY) == true)
             {
