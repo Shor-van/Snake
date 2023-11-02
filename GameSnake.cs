@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using Snake.Screens;
 using Snake.Utilities;
+using System.Text;
 
 namespace Snake
 {
@@ -16,7 +17,7 @@ namespace Snake
         private readonly List<Screen> screens; //holds a list of all active game screens
         private readonly Stopwatch gameTimer; //a stopwatch used to keep track of the current loop time
         private readonly GameTime gameTime; //holds data about the games overall runtime
-        private readonly DrawBuffer drawBuffer; //the buffer used to draw the screen
+        private DrawBuffer drawBuffer; //the buffer used to draw the screen
 
         internal GameSnake() {
             screens = new List<Screen>();
@@ -31,6 +32,8 @@ namespace Snake
             Console.CursorVisible = false;
             Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
             Console.Title = "Snake";
+
+            drawBuffer = new DrawBuffer(0, 0, (short)Console.BufferWidth, (short)Console.BufferHeight, Encoding.Unicode, ConsoleColor.Gray, ConsoleColor.Blue);
 
             ShowScreen(new MenuScreen(this));
             isExiting = false;
@@ -96,6 +99,11 @@ namespace Snake
         {
             for (int i = 0; i < screens.Count; i++) //draw all acrive screens
                 screens[i].Draw(drawBuffer, gameTime);
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            drawBuffer.DrawToConsole();
+            stopwatch.Stop();
         }
 
         /// <summary>Shows the specified screen</summary>
