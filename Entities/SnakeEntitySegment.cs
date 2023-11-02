@@ -10,10 +10,8 @@ namespace Snake.Entities
     /// <summary>rRepresents a snake segment</summary>    
     internal sealed class SnakeEntitySegment
     {
-        private int x; //the X loctaion of the segment
-        private int y; //the Y location of the segment
-        private int lastX; //the last X position of the segment
-        private int lastY; //the last Y position of the segment
+        private int x, y; //the X and Y position of the segment
+        private int lastX, lastY; //the last X and Y position of the segment
         private readonly SegmentType type; //the type of snake segment this is
         private readonly SnakeEntity snake; //the snake this segment belongs to
 

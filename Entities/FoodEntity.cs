@@ -7,8 +7,7 @@ namespace Snake.Entities
     {
         internal const char foodChar = '$'; //the char used to draw the food
 
-        private int x; //the X loctaion of the food
-        private int y; //the Y location of the food
+        private int x, y; //the X and Y position of the food
 
         internal FoodEntity(int x, int y)
         {
