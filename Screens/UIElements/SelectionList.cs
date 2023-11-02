@@ -17,7 +17,7 @@ namespace Snake.Screens
         private readonly ConsoleColor textColor, highlightedColor; //the colors used to draw the text
         private readonly Event[] selected; //an array of all the option selected event handlers
         private readonly int width; //the width(longest option) of the selection list
-        private Alignment textAlignment; //the text alignment
+        private readonly Alignment textAlignment; //the text alignment
 
         /// <summary>An event rasied when the highlighted option chnages</summary>
         internal event EventHandler HighlightedChanged;
