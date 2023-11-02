@@ -45,10 +45,10 @@ namespace Snake.Screens
             }
         }
 
-        protected override void DrawScreen(GameTime gameTime)
+        protected override void DrawScreen(DrawBuffer drawBuffer, GameTime gameTime)
         {
-            playerSnake.Draw();
-            food.Draw();
+            playerSnake.Draw(drawBuffer);
+            food.Draw(drawBuffer);
         }
     }
 }

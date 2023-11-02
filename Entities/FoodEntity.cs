@@ -1,5 +1,7 @@
 using System;
 
+using Snake.Utilities;
+
 namespace Snake.Entities
 {
     /// <summary>Represents a piece of food that a snake can eat to 'grow'</summary>
@@ -20,7 +22,7 @@ namespace Snake.Entities
 
         }
 
-        internal void Draw()
+        internal void Draw(DrawBuffer drawBuffer)
         {
             if(Utilities.Utils.IsWithinConsoleViewport(x, y) == false) return;
 

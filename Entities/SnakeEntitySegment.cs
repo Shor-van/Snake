@@ -36,7 +36,7 @@ namespace Snake.Entities
         }
 
         /// <summary>Draws the segment to the console</summary>
-        internal void Draw()
+        internal void Draw(DrawBuffer drawBuffer)
         {
             //get the char used to draw this segment
             char sgementChar = SnakeEntity.bodySegment;

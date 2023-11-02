@@ -58,13 +58,13 @@ namespace Snake.Screens
 
         protected abstract void UpdateScreen(GameTime gameTime);
 
-        internal void Draw(GameTime gameTime)
+        internal void Draw(DrawBuffer drawBuffer, GameTime gameTime)
         {
-            DrawScreen(gameTime);
+            DrawScreen(drawBuffer, gameTime);
 
             justSwitchedTo = false;
         }
 
-        protected abstract void DrawScreen(GameTime gameTime);
+        protected abstract void DrawScreen(DrawBuffer drawBuffer, GameTime gameTime);
     }
 }

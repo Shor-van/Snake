@@ -73,7 +73,7 @@
     <Compile Include="Utilities/GameTime.cs" />
     <Compile Include="Utilities/Event.cs" />
     <Compile Include="Utilities/Keyboard.cs" />
-    <Compile Include="Utilities/ScreenBuffer.cs" />
+    <Compile Include="Utilities/DrawBuffer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 

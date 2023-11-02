@@ -45,9 +45,9 @@ namespace Snake.Screens
             selection.Update(gameTime);
         }
 
-        protected override void DrawScreen(GameTime gameTime)
+        protected override void DrawScreen(DrawBuffer drawBuffer, GameTime gameTime)
         {
-            selection.Draw(gameTime);
+            selection.Draw(drawBuffer, gameTime);
         }
 
         //Event handlers

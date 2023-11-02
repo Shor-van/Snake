@@ -16,6 +16,7 @@ namespace Snake
         private readonly List<Screen> screens; //holds a list of all active game screens
         private readonly Stopwatch gameTimer; //a stopwatch used to keep track of the current loop time
         private readonly GameTime gameTime; //holds data about the games overall runtime
+        private readonly DrawBuffer drawBuffer; //the buffer used to draw the screen
 
         internal GameSnake() {
             screens = new List<Screen>();
@@ -94,7 +95,7 @@ namespace Snake
         private void Draw(GameTime gameTime)
         {
             for (int i = 0; i < screens.Count; i++) //draw all acrive screens
-                screens[i].Draw(gameTime);
+                screens[i].Draw(drawBuffer, gameTime);
         }
 
         /// <summary>Shows the specified screen</summary>

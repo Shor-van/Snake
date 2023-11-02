@@ -31,7 +31,7 @@ namespace Snake.Screens
 
         }
 
-        internal void Draw(GameTime gameTime)
+        internal void Draw(DrawBuffer drawBuffer, GameTime gameTime)
         {
 
         }

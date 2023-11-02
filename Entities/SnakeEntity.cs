@@ -67,10 +67,10 @@ namespace Snake.Entities
         }
 
         /// <summary>Draws the snake in the console at its current location</summary>
-        internal void Draw()
+        internal void Draw(DrawBuffer drawBuffer)
         {
             for (int i = 0; i < segments.Count; i++)
-                segments[i].Draw();
+                segments[i].Draw(drawBuffer);
             fullRedraw = false;
         }
 

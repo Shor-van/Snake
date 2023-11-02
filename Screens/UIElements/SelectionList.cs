@@ -90,7 +90,7 @@ namespace Snake.Screens
 
         /// <summary>Draws the <see cref="SelectionList"/> at its current X/Y location</summary>
         ///<param name="gameTime">The object that holds info about the game's run time</param>
-        internal void Draw(GameTime gameTime)
+        internal void Draw(DrawBuffer drawBuffer, GameTime gameTime)
         {
             int halfWidth = width / 2;
             ConsoleColor current = Console.ForegroundColor;
