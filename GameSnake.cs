@@ -29,7 +29,7 @@ namespace Snake
             Console.CursorVisible = false;
             Console.Title = "Snake";
 
-            ShowScreen(new GameScreen(this));
+            ShowScreen(new MenuScreen(this));
             isExiting = false;
         }
 
@@ -74,11 +74,17 @@ namespace Snake
         ///<param name="gameTime">The object that holds info about the game's run time</param>
         private void Update(GameTime gameTime)
         {
+            //Check keyboard inputs
+            if (Console.KeyAvailable == true || Keyboard.GetIgnoreInput())
+                Keyboard.Update(gameTime);
+
             //process input for screen, if we have
             if(screens.Count > 0) screens[0]?.HandleInput(gameTime);
             
             for (int i = 0; i < screens.Count; i++) //update all active screens
                 screens[i].Update(gameTime);
+
+            Keyboard.Clear();
         }
 
         /// <summary>Executes the draw part of the game's loop</summary>
@@ -128,7 +134,7 @@ namespace Snake
                 if(removeCurrentScreen == true) screens.RemoveAt(0); else screens[0].OnScreenSwitchFrom();
 
             if (screens.Contains(screen) != true) //if the screen is not in the screens list, just add it at the start
-                { screen.Initalize(); screens.Insert(0, screen); return; }
+                { screen.Initalize(); screens.Insert(0, screen); screen.JustSwitchedTo = true; return; }
 
              //if the screen is already at index 0 do nothing
             if(screen == screens[0]) return;
