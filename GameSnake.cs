@@ -19,11 +19,35 @@ namespace Snake
         private readonly GameTime gameTime; //holds data about the games overall runtime
         private DrawBuffer drawBuffer; //the buffer used to draw the screen
 
+        private TimeSpan lastLoop; //the time it took to process the last loop
+        private TimeSpan lastUpdate; //the time it took to process the last update
+        private TimeSpan lastDraw; //the time it took to process the last draw
+        private TimeSpan lastFinalizeDraw; //the time it took to process the last finalize draw call
+
+        /// <summary>Get the time it took to process the last game tick</summary>
+        internal TimeSpan LastLoopTime => lastLoop;
+
+        /// <summary>Get the time it took to process the last update call</summary>
+        internal TimeSpan LastUpdateTime => lastUpdate;
+
+        /// <summary>Get the time it took to process the last draw call</summary>
+        internal TimeSpan LastDrawTime => lastDraw;
+
+        /// <summary>Get the time it took to process the last finalize draw call</summary>
+        internal TimeSpan LastFinalizeDraw => lastFinalizeDraw;
+
+        /// <summary>Get the time that has elapsed so far since the start of this game tick</summary>
+        internal TimeSpan CurrentTickElapsedTime => gameTimer.Elapsed;
+
+        /// <summary>Get or set the target time step(time between ticks)</summary>
+        internal TimeSpan TargetTimeStep { get => targetTimeStep; set => targetTimeStep = value; }
+
         internal GameSnake() {
             screens = new List<Screen>();
             gameTime = new GameTime();
             gameTimer = new Stopwatch();
-            targetTimeStep = TimeSpan.FromMilliseconds(1000 / targetTicksPerSecond);
+
+            targetTimeStep = TimeSpan.FromMilliseconds((double)(1000d / targetTicksPerSecond));
         }
 
         /// <summary>Initalizes the game, sets up the screens</summary>
@@ -36,6 +60,7 @@ namespace Snake
             drawBuffer = new DrawBuffer(0, 0, (short)Console.BufferWidth, (short)Console.BufferHeight, Encoding.Unicode, ConsoleColor.Gray, ConsoleColor.Black);
 
             ShowScreen(new MenuScreen(this));
+            ShowScreen(new DebugScreen(this), false, false);
             isExiting = false;
         }
 
@@ -60,7 +85,7 @@ namespace Snake
         private void Tick()
         {
             //Sleep if we need to maintain a fixed rate
-            TimeSpan lastLoop = gameTimer.Elapsed;
+            lastLoop = gameTimer.Elapsed;
             if(lastLoop < targetTimeStep)
                 System.Threading.Thread.Sleep(targetTimeStep - lastLoop);
 
@@ -81,6 +106,7 @@ namespace Snake
         private void Update(GameTime gameTime)
         {
             //Check keyboard inputs
+            TimeSpan elapsed = gameTimer.Elapsed;
             if (Console.KeyAvailable == true || Keyboard.GetIgnoreInput())
                 Keyboard.Update(gameTime);
 
@@ -91,19 +117,21 @@ namespace Snake
                 screens[i].Update(gameTime);
 
             Keyboard.Clear();
+            lastUpdate = gameTimer.Elapsed - elapsed;
         }
 
         /// <summary>Executes the draw part of the game's loop</summary>
         ///<param name="gameTime">The object that holds info about the game's run time</param>
         private void Draw(GameTime gameTime)
         {
+            TimeSpan elapsedStart = gameTimer.Elapsed;
             for (int i = 0; i < screens.Count; i++) //draw all acrive screens
                 screens[i].Draw(drawBuffer, gameTime);
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            TimeSpan elapsedFinalDraw = gameTimer.Elapsed;
             drawBuffer.FiinalizeDrow(true);
-            stopwatch.Stop();
+            lastFinalizeDraw = gameTimer.Elapsed - elapsedFinalDraw;
+            lastDraw = gameTimer.Elapsed - elapsedStart;
         }
 
         /// <summary>Shows the specified screen</summary>
