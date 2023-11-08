@@ -75,6 +75,7 @@
     <Compile Include="Utilities/Event.cs" />
     <Compile Include="Utilities/Keyboard.cs" />
     <Compile Include="Utilities/DrawBuffer.cs" />
+    <Compile Include="Utilities/SleepHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 

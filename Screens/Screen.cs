@@ -9,12 +9,16 @@ namespace Snake.Screens
         protected readonly GameSnake gameInstance; //A referance to the game the screen 'belongs' to
         protected bool justSwitchedTo; //whether the screen was just switched to
         private bool initalized; //whether the screen has been initalized
+        private bool hidden; //whether to no draw the screen
 
         /// <summary>Gets wether the <see cref="Screen"/> has been initalized</summary>
         internal bool Initalized => initalized;
 
-        /// <summary>Get or set whether this <see cref="Screen"/> was just switched to, witch means it will call <see cref="Screen.OnScreenSwitchTo"/></summary>
+        /// <summary>Get or set whether this <see cref="Screen"/> was just switched to, witch means it will call <see cref="OnScreenSwitchTo"/></summary>
         internal bool JustSwitchedTo { get => justSwitchedTo; set => justSwitchedTo = value; }
+
+        /// <summary>Get or set whether this <see cref="Screen"/> is not drawn, this only blocks calls to <see cref="DrawScreen"/></summary>
+        internal bool Hidden { get => hidden; set => hidden = value; }
 
         /// <summary>Base constructor for <see cref="Screen"/>, this should never be called outside a dervied class</summary>
         /// <param name="gameInstance">Refrence to the game's main instance</param>
@@ -49,6 +53,8 @@ namespace Snake.Screens
             if (justSwitchedTo == true) { //Check if the screen was just switched to
                 LayoutScreen();
                 OnScreenSwitchTo(gameTime);
+
+                justSwitchedTo = false;
             }
 
             UpdateScreen(gameTime);
@@ -60,9 +66,8 @@ namespace Snake.Screens
 
         internal void Draw(DrawBuffer drawBuffer, GameTime gameTime)
         {
-            DrawScreen(drawBuffer, gameTime);
-
-            justSwitchedTo = false;
+            if(hidden == false)
+                DrawScreen(drawBuffer, gameTime);
         }
 
         protected abstract void DrawScreen(DrawBuffer drawBuffer, GameTime gameTime);
