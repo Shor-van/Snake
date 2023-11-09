@@ -38,7 +38,8 @@ namespace Snake.Screens
 
             //base data
             DrawDebugLine(gameInstance.GetType().Assembly.GetName().Name + " V:" + typeof(DebugScreen).Assembly.GetName().Version + " FPS:" + "-" + " TPS:" + "-" + " CurrentScreen:" + (gameInstance.PrimaryScreen != null ? gameInstance.PrimaryScreen.GetType().Name : "NULL"), ref line, drawBuffer);
-            DrawDebugLine("LT:" + gameInstance.LastLoopTime.TotalMilliseconds + " UT:" + gameInstance.LastUpdateTime.TotalMilliseconds + " DT:" + gameInstance.LastDrawTime.TotalMilliseconds + " FDT:" + gameInstance.LastFinalizeDrawTime.TotalMilliseconds + " GT:" + gameTime.ElapsedGameTime.TotalMilliseconds + " TTS:" + gameInstance.TargetTimeStep.TotalMilliseconds, ref line, drawBuffer);
+            DrawDebugLine("LT:" + gameInstance.LastLoopTime.TotalMilliseconds + " UT:" + gameInstance.LastUpdateTime.TotalMilliseconds + " DT:" + gameInstance.LastDrawTime.TotalMilliseconds + " SDT:" + gameInstance.LastScreenDrawTime.TotalMilliseconds + " FDT:" + gameInstance.LastFinalizeDrawTime.TotalMilliseconds, ref line, drawBuffer);
+            DrawDebugLine("ST:" + gameInstance.LastSleepTime.TotalMilliseconds + " LTS:" + gameInstance.LastTargetSleep + " GT:" + gameTime.ElapsedGameTime.TotalMilliseconds + " TTS:" + gameInstance.TargetTimeStep.TotalMilliseconds, ref line, drawBuffer);
             DrawDebugLine("DGUT:" + lastDebugUpdate.TotalMilliseconds + " DGDT:" + lastDebugDraw.TotalMilliseconds, ref line, drawBuffer);
 
             //screens

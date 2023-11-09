@@ -24,6 +24,8 @@ namespace Snake
         private TimeSpan lastUpdate; //the time it took to process the last update
         private TimeSpan lastDraw; //the time it took to process the last draw
         private TimeSpan lastFinalizeDraw; //the time it took to process the last finalize draw call
+        private TimeSpan lastSleepTime; //the time main thread spent sleeping the the last tick
+        private double lastTargetSleep; //the target sleep time for the last loop
 
         /// <summary>Get the time it took to process the last game tick</summary>
         internal TimeSpan LastLoopTime => lastLoop;
@@ -39,6 +41,12 @@ namespace Snake
 
         /// <summary>Get the time it took to process all the last screen draw calls, note this is the same as, <see cref="LastDrawTime"/> - <see cref="LastFinalizeDrawTime"/></summary>
         internal TimeSpan LastScreenDrawTime => lastDraw - lastFinalizeDraw;
+
+        /// <summary>Get the time main thread spent sleeping the the last tick</summary>
+        internal TimeSpan LastSleepTime => lastSleepTime;
+
+        /// <summary>Get the target sleep time for the last loop</summary>
+        internal double LastTargetSleep => lastTargetSleep;
 
         /// <summary>Get the time that has elapsed so far since the start of this game tick</summary>
         internal TimeSpan CurrentTickElapsedTime => gameTimer.Elapsed;
@@ -96,8 +104,12 @@ namespace Snake
         {
             //Sleep if we need to maintain a fixed rate
             lastLoop = gameTimer.Elapsed;
-            if(lastLoop < targetTimeStep)
-                SleepHelper.SleepForNoMoreThan(targetTimeStep.TotalMilliseconds - lastLoop.TotalMilliseconds);
+            if (lastLoop < targetTimeStep) { 
+                double taregtSleep = targetTimeStep.TotalMilliseconds - lastLoop.TotalMilliseconds; 
+                SleepHelper.SleepForNoMoreThan(taregtSleep); 
+                lastSleepTime = gameTimer.Elapsed - lastLoop;
+                lastTargetSleep = taregtSleep;
+            } else lastSleepTime = TimeSpan.Zero;
 
             //update gane time
             gameTime.ElapsedGameTime = gameTimer.Elapsed;
