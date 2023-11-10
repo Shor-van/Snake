@@ -72,7 +72,7 @@ namespace Snake
         {
             Console.CursorVisible = false;
             Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
-            Console.Title = "Snake";
+            Console.Title = this.GetType().Assembly.GetName().Name;
 
             drawBuffer = new DrawBuffer(0, 0, (short)Console.BufferWidth, (short)Console.BufferHeight, Encoding.Unicode, ConsoleColor.Gray, ConsoleColor.Black);
 
