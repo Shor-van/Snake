@@ -124,7 +124,7 @@ namespace Snake
         }
 
         /// <summary>Execute's the update part of the game's loop</summary>
-        ///<param name="gameTime">The object that holds info about the game's run time</param>
+        /// <param name="gameTime">The object that holds info about the game's run time</param>
         private void Update(GameTime gameTime)
         {
             //Check keyboard inputs
@@ -146,7 +146,7 @@ namespace Snake
         }
 
         /// <summary>Executes the draw part of the game's loop</summary>
-        ///<param name="gameTime">The object that holds info about the game's run time</param>
+        /// <param name="gameTime">The object that holds info about the game's run time</param>
         private void Draw(GameTime gameTime)
         {
             TimeSpan elapsedStart = gameTimer.Elapsed;

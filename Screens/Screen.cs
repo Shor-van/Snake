@@ -42,12 +42,18 @@ namespace Snake.Screens
         protected abstract void LayoutScreen();
 
         /// <summary>Called when the screen was just switched to</summary>
-        /// <param name="gameTime"></param>
+        /// <param name="gameTime">The object that holds info about the game's run time</param>
         protected virtual void OnScreenSwitchTo(GameTime gameTime) { }
 
         /// <summary>Called when the screen was just switched from</summary>
         internal virtual void OnScreenSwitchFrom() { }
 
+        /// <summary>Handles the <see cref="Screen"/> input logic</summary>
+        /// <param name="gameTime">The object that holds info about the game's run time</param>
+        internal abstract void HandleInput(GameTime gameTime);
+
+        /// <summary>Updates the <see cref="Screen"/> and its elements, anything related to input logic should be done in <see cref="HandleInput"/></summary>
+        /// <param name="gameTime">The object that holds info about the game's run time</param>
         internal void Update(GameTime gameTime) 
         {
             if (justSwitchedTo == true) { //Check if the screen was just switched to
@@ -60,16 +66,22 @@ namespace Snake.Screens
             UpdateScreen(gameTime);
         }
 
-        internal abstract void HandleInput(GameTime gameTime);
-
+        /// <summary>Updates the <see cref="Screen"/> and its elements, anything related to input logic should be done in <see cref="HandleInput"/></summary>
+        /// <param name="gameTime">The object that holds info about the game's run time</param>
         protected abstract void UpdateScreen(GameTime gameTime);
 
+        /// <summary>Draws the <see cref="Screen"/> and its elements</summary>
+        /// <param name="drawBuffer"></param>
+        /// <param name="gameTime">The object that holds info about the game's run time</param>
         internal void Draw(DrawBuffer drawBuffer, GameTime gameTime)
         {
             if(hidden == false)
                 DrawScreen(drawBuffer, gameTime);
         }
 
+        /// <summary>Draws the <see cref="Screen"/> and its elements</summary>
+        /// <param name="drawBuffer"></param>
+        /// <param name="gameTime">The object that holds info about the game's run time</param>
         protected abstract void DrawScreen(DrawBuffer drawBuffer, GameTime gameTime);
     }
 }
